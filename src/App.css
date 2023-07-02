@@ -1,0 +1,124 @@
+/* OM NAMASHIVAYA */
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+:root {
+
+  --backGround_col: #fff0df;
+  --mainColor: #ef5644;
+  --subHeadColor: #3f3f3f;
+  --mainHead: "Kanit", sans-serif;
+  --logoHead: "Anton", sans-serif;
+
+}
+
+body {
+  background-color: var(--backGround_col);
+  overflow-x: hidden;
+}
+
+.mainBtStyle {
+  background-color: #ef5644;
+  padding: 10px 19px;
+  border-radius: 3px;
+  color: whitesmoke;
+  transition: transform 0.5s;
+  cursor: pointer;
+  border: 3px solid #ef5644;
+
+  letter-spacing: 1px;
+  font-family: var(--mainHead);
+}
+
+
+.mainBtStyle:hover {
+  background-color: transparent;
+  color: #ef5644;
+  transform: scale(1.03, 1.03);
+  border: 3px solid #ef5644;
+}
+
+.applyFlex {
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+}
+
+.applyFlexCol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+body::-webkit-scrollbar {
+  width: 0.50rem;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #ef5644;
+  border-radius: 25px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #ef5644;
+
+}
+
+
+.sec-Head {
+
+  font-family: var(--logoHead);
+  text-align: center;
+  display: inline;
+  color: var(--subHeadColor);
+  font-size: 35px;
+  border-bottom: 5px solid var(--mainColor);
+
+}
+
+.changeFontColor {
+  color: var(--subHeadColor);
+}
+
+.applyColor {
+  background-color: #fde4c7;
+  color: #ff1b01;
+}
+
+
+.linkStyle {
+  text-decoration: none;
+ 
+}
+
+.sp-bt {
+  border: none;
+  margin: 15px 15px;
+  background-color: transparent;
+  color: #01458e;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 16px;
+  text-decoration: underline;
+  cursor: pointer;
+
+}
+
+
+.appblur {
+  filter: blur(8px);
+  pointer-events: none;
+  
+}
+ 
