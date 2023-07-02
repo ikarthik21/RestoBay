@@ -99,7 +99,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .linkStyle {
   text-decoration: none;
- 
+
 }
 
 .sp-bt {
@@ -119,6 +119,36 @@ body::-webkit-scrollbar-thumb:hover {
 .appblur {
   filter: blur(8px);
   pointer-events: none;
-  
+
 }
+
+.sp-undline {
+  margin-top: 10px;
+  border-bottom: 3px solid #ef5644;
+
+}
+.spl_box {
+ padding: 5px 100px;
  
+}
+.spl_num {
+color:  #f95543;;
+}
+
+.right_float{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn{
+  padding: 10px 25px;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--mainColor);
+    color: white;
+    font-family: monospace;
+    font-weight: bold;
+    border-radius: 20px;
+    font-size: 17px;
+}

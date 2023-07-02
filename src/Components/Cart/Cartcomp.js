@@ -26,7 +26,8 @@ const CartComp = (props) => {
         <Container>
 
             <CartCheckBox>
-                <h3>Order Summary</h3>
+                <h2>Order Summary</h2>
+                <div className='sp-undline'></div>
 
                 <OrderTable>
 
@@ -75,11 +76,21 @@ const CartComp = (props) => {
 
                     }
 
+                    <div className='sp-undline'></div>
+                    <OrderRow className='spl_box'>
 
-                    <OrderRow>
-                        <h3>Total</h3>
-                        <h4> {props?.cart?.totalPrice}</h4>
+                        <h2>Total</h2>
+                        <h2 className="spl_num"> {props?.cart?.totalPrice}</h2>
                     </OrderRow>
+
+                    <div className='right_float'>
+                        <button className='right_float btn'>Pay</button>
+
+                    </div>
+
+
+
+
 
                 </OrderTable>
 

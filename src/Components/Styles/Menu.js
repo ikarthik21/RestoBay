@@ -140,7 +140,7 @@ span{
 
 export const CartCheckBox = styled.div`
 padding: 15px 40px;
- 
+color:#3f3f3f;
 
 `
 export const OrderTable = styled.div`
@@ -157,7 +157,9 @@ export const OrderRow = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-between;
-margin: 10px 4px;
+margin: 10px 4px;   
+
+
 `
 export const OrderItem = styled.div`
 display: flex;
@@ -169,7 +171,12 @@ width:4rem;
 border-radius:50px;
 } 
 margin: 10px 4px;
-min-width: 12rem;
+min-width: 14rem;
+h3{
+  color:#3f3f3f;
+  font-size: 19px;
+}
+
 
 `
 
@@ -190,28 +197,13 @@ export const ModalOverlay = styled.div`
 
 export const ModalContent = styled.div`
   background-color:  #fff0df;
-  padding: 20px;
-  border-radius: 8px;
+  border-radius: 12px;
   width: 80%;
   height: 95%;
-  button{
-    color:white;
-    font-size:30px;
-    position: absolute;
-    top: 2rem;
-    background-color:var(--mainColor);
-    border-radius: 30px;
-    right: 12rem;
-    outline: none;
-    border: none;
-     cursor: pointer;
-    padding: 6px 13px;
-  }
-   overflow-y: scroll;
-
+  overflow: scroll;
 
   &::-webkit-scrollbar {
-    width: 0.50rem;
+    width: 0.60rem;
   }
   
   &::-webkit-scrollbar-thumb {
@@ -226,3 +218,20 @@ export const ModalContent = styled.div`
  
 `;
 
+
+
+export const ModalCloseBtn = styled.div`
+   
+    color:white;
+    font-size:25px;
+    position: absolute;
+    top: 2rem;
+    background-color:var(--mainColor);
+    border-radius: 30px;
+    right: 12rem;
+    outline: none;
+    border: none;
+     cursor: pointer;
+    padding: 6px 13px;
+  
+` 
