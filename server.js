@@ -8,11 +8,14 @@ import mongoose from 'mongoose';
 const PORT = process.env.PORT || 3100;
 import router from './routes/routes.js';
 
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+
 
 
 // Mongo Connection //

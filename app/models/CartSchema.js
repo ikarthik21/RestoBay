@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const itemSchema = new mongoose.Schema({
+export const itemSchema = new mongoose.Schema({
     item_id: { type: String, required: true },
     name: { type: String, required: true },
     image: { type: String, required: true },
