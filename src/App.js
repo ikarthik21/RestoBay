@@ -6,6 +6,8 @@ import Menu from './Components/Menu/Menu';
 import Login from './Components/Login/Login';
 import jwt_decode from 'jwt-decode';
 import Cookies from 'js-cookie';
+import Payment from './Components/Cart/Payment';
+import Admindash from './Components/Admin/Admindash';
 
 function App() {
   const [userRole, setUserRole] = useState('');
@@ -17,7 +19,10 @@ function App() {
       const decodedToken = jwt_decode(token);
       const { role, username } = decodedToken;
       setuserId(username);
+
+
       if (role === "admin" || role === "customer") {
+
         setUserRole(role);
         setIsAuth(true);
       }
@@ -25,7 +30,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div >
       <Router>
         <Navbar isAuth={isAuth} />
         <Routes>
@@ -33,11 +38,14 @@ function App() {
             <>
               <Route path="/" element={<Home />} />
               <Route path="/menu" element={<Menu userId={userId} />} />
+              <Route path="/admin" element={<Admindash />} />
+              <Route path="/pay" element={<Payment />} />
             </>
           ) : (
             <>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
+
             </>
           )}
         </Routes>

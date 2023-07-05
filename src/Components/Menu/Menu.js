@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Menuitems from "./Menu.json";
 import '../../App.css'
 import { Allitems, Container, DescItem, FoodItem, SelectCat, QtyBox } from '../Styles/Menu';
-import { udateCart, getCart } from '../../Service/Api'
+import { udateCart, getCart, getMenu } from '../../Service/Api'
 import { CartBox } from '../Styles/Navstyles';
 import { FaShoppingCart } from 'react-icons/fa'
 import CartComp from '../Cart/Cartcomp';
@@ -13,6 +12,7 @@ const Menu = (props) => {
     const [itemDisplay, setitemDisplay] = useState("");
     const [itemCat, setitemCat] = useState("");
     const [cart, setCart] = useState();
+    const [menu, setMenu] = useState();
 
     // Toggle between the food categories
     useEffect(() => {
@@ -23,6 +23,16 @@ const Menu = (props) => {
             setitemDisplay("");
         }
     }, [itemCat])
+
+    // get Menu
+    useEffect(() => {
+        const getMenulis = async () => {
+            const resp = await getMenu();
+            setMenu(resp.data);
+        }
+        getMenulis();
+    }, [])
+
 
     // Get Existing Cart from Db
     useEffect(() => {
@@ -126,6 +136,7 @@ const Menu = (props) => {
 
 
     return (
+
         <Container >
             <CartBox onClick={toggleCartModal}>
                 <FaShoppingCart style={{ color: '#ef5644' }} size={22} />
@@ -146,55 +157,58 @@ const Menu = (props) => {
                     <li onClick={() => { setitemCat("dessert") }}>Dessert</li>
                 </ul>
             </SelectCat>
-            <Allitems className={cartshow ? "appblur" : ""}>
-                {
-                    itemDisplay === "all" ?
-                        Menuitems.map((item) => {
-                            const cartItem = cart?.Items.find((cartItem) => cartItem.item_id === item.item_id);
-                            return (
-                                <FoodItem key={item.item_id}>
-                                    <img src={`/images/${item.image}`} alt="" />
-                                    <h3>{item.name}</h3>
-                                    <DescItem>
-                                        <h4> Rs.<span>{item.price}</span></h4>
-                                        <button onClick={() => addItem(item)}>add</button>
-                                        {
-                                            cartItem &&
-                                            <QtyBox>
-                                                <div onClick={() => { decQuan(item) }}>-</div>
-                                                <span>{cartItem.quantity}</span>
-                                                <div onClick={() => { incQuan(item) }}>+</div>
-                                            </QtyBox>
-                                        }
-                                    </DescItem>
-                                </FoodItem>
-                            );
-                        })
-                        : Menuitems.filter(item => item.category === itemCat).map((item) => {
-                            const cartItem = cart?.Items.find((cartItem) => cartItem.item_id === item.item_id);
 
-                            return (
-                                <FoodItem key={item.item_id}>
-                                    <img src={`/images/${item.image}`} alt="" />
-                                    <h3>{item.name}</h3>
-                                    <DescItem>
-                                        <h4> Rs.<span>{item.price}</span></h4>
-                                        <button onClick={() => addItem(item)}>add</button>
-                                        {cartItem &&
-                                            <QtyBox>
-                                                <div onClick={() => { decQuan(item) }}>  -</div>
-                                                <span  >{cartItem.quantity}</span>
-                                                <div onClick={() => { incQuan(item) }}>+</div>
-                                            </QtyBox>
-                                        }
-                                    </DescItem>
-                                </FoodItem>
-                            );
-                        })
-                }
-            </Allitems>
+            {
+                menu ? <Allitems className={cartshow ? "appblur" : ""}>
+                    {
+                        itemDisplay === "all" ?
+                            menu.map((item) => {
+                                const cartItem = cart?.Items.find((cartItem) => cartItem.item_id === item.item_id);
+                                return (
+                                    <FoodItem key={item.item_id}>
+                                        <img src={`/images/${item.image}`} alt="" />
+                                        <h3>{item.name}</h3>
+                                        <DescItem>
+                                            <h4> Rs.<span>{item.price}</span></h4>
+                                            <button onClick={() => addItem(item)}>add</button>
+                                            {
+                                                cartItem &&
+                                                <QtyBox>
+                                                    <div onClick={() => { decQuan(item) }}>-</div>
+                                                    <span>{cartItem.quantity}</span>
+                                                    <div onClick={() => { incQuan(item) }}>+</div>
+                                                </QtyBox>
+                                            }
+                                        </DescItem>
+                                    </FoodItem>
+                                );
+                            })
+                            : menu.filter(item => item.category === itemCat).map((item) => {
+                                const cartItem = cart?.Items.find((cartItem) => cartItem.item_id === item.item_id);
+
+                                return (
+                                    <FoodItem key={item.item_id}>
+                                        <img src={`/images/${item.image}`} alt="" />
+                                        <h3>{item.name}</h3>
+                                        <DescItem>
+                                            <h4> Rs.<span>{item.price}</span></h4>
+                                            <button onClick={() => addItem(item)}>add</button>
+                                            {cartItem &&
+                                                <QtyBox>
+                                                    <div onClick={() => { decQuan(item) }}>  -</div>
+                                                    <span  >{cartItem.quantity}</span>
+                                                    <div onClick={() => { incQuan(item) }}>+</div>
+                                                </QtyBox>
+                                            }
+                                        </DescItem>
+                                    </FoodItem>
+                                );
+                            })
+                    }
+                </Allitems> : ""
+
+            }
         </Container >
-
     )
 }
 

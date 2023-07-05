@@ -28,7 +28,7 @@ export const loginUser = async (user) => {
 }
 export const udateCart = async (cart) => {
    try {
-    
+
       return axios.post(`${curr_url}/update-cart`, cart);
    } catch (err) {
       console.log(err);
@@ -37,8 +37,30 @@ export const udateCart = async (cart) => {
 }
 
 export const getCart = async (cartidObj) => {
+
    try {
       return await axios.post(`${curr_url}/get-cart`, cartidObj);
+   } catch (err) {
+      console.log(err);
+   }
+
+}
+
+
+export const getMenu = async () => {
+
+   try {
+      return await axios.get(`${curr_url}/getmenu`);
+   } catch (err) {
+      console.log(err);
+   }
+
+}
+
+export const makeOrder = async (cart) => {
+
+   try {
+      return await axios.post(`${curr_url}/create-order`,cart);
    } catch (err) {
       console.log(err);
    }

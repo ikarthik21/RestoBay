@@ -1,8 +1,8 @@
 import { Container, CartCheckBox, OrderTable, OrderRow, QtyBox, OrderItem } from '../Styles/Menu';
+import Payment from './Payment';
+import { makeOrder } from '../../Service/Api';
 
-
-
-
+ 
 const CartComp = (props) => {
 
     const decQuan = props.decQuan;
@@ -21,6 +21,18 @@ const CartComp = (props) => {
         // Handle the loading state while waiting for the cart data
         return <div>Loading...</div>;
     }
+
+    const handlePayment = async () => {
+        try {
+            const resp = await makeOrder(props.cart);
+            console.log(resp.data);
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+
 
     return (
         <Container>
@@ -84,11 +96,11 @@ const CartComp = (props) => {
                     </OrderRow>
 
                     <div className='right_float'>
-                        <button className='right_float btn'>Pay</button>
+                        <button className='right_float btn' onClick={handlePayment}>Pay</button>
 
                     </div>
 
-
+                    <Payment cart={props.cart} />
 
 
 

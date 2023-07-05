@@ -9,7 +9,7 @@ import styled, { keyframes, css } from 'styled-components';
 import { MdLunchDining, MdDinnerDining, MdFastfood, MdTableBar } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { MainSection, Imagebox, ContentInner, Contentbox, ContactBox, StartOpSel, ContactItem, ContactUs } from '../Styles/HomeStyles';
-
+import { Container } from '../Styles/Menu'
 
 
 const Home = () => {
@@ -22,9 +22,9 @@ const Home = () => {
 
 
   return (
-    <>
+    <Container>
 
-      <MainSection>
+      <MainSection  >
         <Imagebox>
           <img src="/images/home_main.png" alt='' />
         </Imagebox>
@@ -64,9 +64,12 @@ const Home = () => {
 
       <div className='applyFlex'>
         <h2 className='sec-Head'>Our Restaurant</h2>
+
       </div>
 
+
       <ImageSilder />
+
 
       <ContactUs>
         <h2 className='sec-Head'>Contact Us</h2>
@@ -104,7 +107,7 @@ const Home = () => {
         </ContactBox>
       </ContactUs>
 
-    </>
+    </Container>
   )
 }
 
@@ -122,7 +125,7 @@ const openAnimation = keyframes`
 
 const Menu = styled.div`
   position: relative;
-  top: ${({ isOpen }) => (isOpen ? '0' :"")};
+  top: ${({ isOpen }) => (isOpen ? '0' : "")};
   left: 0; 
   background-color: #f1f1f1;
   animation: ${({ isOpen }) =>
@@ -130,5 +133,5 @@ const Menu = styled.div`
       ? css`
           ${openAnimation} 1s ease;
         `
-      : ``  };
+      : ``};
 `;

@@ -1,6 +1,7 @@
-import { ModalContent, ModalOverlay,ModalCloseBtn } from '../Styles/Menu';
+import { ModalContent, ModalOverlay, ModalCloseBtn } from '../Styles/Menu';
 
 const Modal = ({ onClose, children }) => {
+    
     return (
         <ModalOverlay>
             <ModalContent>

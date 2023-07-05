@@ -4,19 +4,16 @@ import styled from "styled-components"
 export const MainSection = styled.div`
 display :flex;
 align-items:center;
-margin : 0px  25px; 
-padding:25px 20px;
 z-index:2;
 margin-top:5rem;
-
-
+padding-right:7rem;
+justify-content:center;
 `
 export const Imagebox = styled.div` 
-padding: 60px 90px; 
 img{
-  height:390px;
+  height:22rem;
 }
-
+padding:3rem 5rem 5rem 5rem; 
 
 `
 export const Contentbox = styled.div`
@@ -48,6 +45,7 @@ justify-content:center;
 flex-direction: column;
 z-index:2;
  
+ 
 `
 
 export const StartOpSel = styled.div`
@@ -74,7 +72,7 @@ p{
 
 
 export const ContentInner = styled.div` 
-margin-top:100px;
+margin-top:8rem;
 align-items: center; 
 flex-direction:column;
 min-height:230px;
