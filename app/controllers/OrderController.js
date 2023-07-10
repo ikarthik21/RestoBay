@@ -4,52 +4,118 @@ import Razorpay from 'razorpay';
 import dotenv from 'dotenv';
 dotenv.config()
 import Order from "../models/OrderSchema.js";
- 
+import Cart from "../models/CartSchema.js";
+import crypto from 'crypto';
+import jwt from 'jsonwebtoken';
+dotenv.config();
+
+
+
 const razorpay = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,
     key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
+
+
 const OrderController = () => {
 
     return {
         async createOrder(req, res) {
-            const { Items, totalItems } = req.body;
 
-            const MenuList = await Menu.find({});
+            const { Items, totalItems, cartId, totalPrice } = req.body;
 
-            let totalPrice = 0;
+            const OrderPres = await Order.findOne({ $and: [{ cartId: cartId }, { status: "payment pending" }] });
+            if (OrderPres) {
 
-            for (const cartItem of Items) {
-                const menuItem = MenuList.find(item => item.item_id === cartItem.item_id);
-                if (menuItem) {
-                    totalPrice += menuItem.price * cartItem.quantity;
-                }
+                return res.status(200).json({ orderId: OrderPres.orderId, amount: OrderPres.totalPrice });
             }
+            else {
 
-            // Create an order in Razorpay
+                let totalPrice = 0;
 
-            const razorpayOrder = await razorpay.orders.create({
-                amount: totalPrice * 100,
-                currency: 'INR',
-            });
 
-            // Store the order details in MongoDB
+                const MenuItems = await Menu.find({});
+                for (const cartItem of Items) {
+                    const menuItem = MenuItems.find(item => item.item_id === cartItem.item_id);
+                    if (menuItem) {
+                        totalPrice += menuItem.price * cartItem.quantity;
+                    }
+                }
 
-            const order = new Order({
-                orderId: razorpayOrder.id,
-                totalPrice: totalPrice,
-                status: 'created',
-                totalItems: totalItems,
-                Items: Items
+                // Create an order in Razorpay
 
-            });
-            await order.save();
+                const razorpayOrder = await razorpay.orders.create({
+                    amount: totalPrice * 100,
+                    currency: 'INR',
+                });
 
-            res.json({
-                orderId: razorpayOrder.id,
-                amount: totalPrice,
-            });
+                try {
+
+
+
+                    const order = new Order({
+                        orderId: razorpayOrder.id,
+                        totalPrice: totalPrice,
+                        status: "payment pending",
+                        totalItems: totalItems,
+                        Items: Items,
+                        cartId: cartId
+                    });
+
+                    await order.save();
+
+
+                    res.json({
+                        orderId: razorpayOrder.id,
+                        amount: totalPrice,
+                    });
+
+                }
+                catch (error) {
+                    console.log(error);
+                }
+
+
+            }
+        },
+
+        async verifyPayment(req, res) {
+
+
+            const { orderCreationId, razorpayPaymentId, razorpayOrderId, razorpaySignature, cartId } = req.body;
+
+            const text = orderCreationId + '|' + razorpayPaymentId;
+
+            const generatedSignature = crypto
+                .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+                .update(text)
+                .digest('hex');
+
+            if (generatedSignature === razorpaySignature) {
+
+                await Order.findOneAndUpdate({ orderId: razorpayOrderId }, { status: "payment successful" });
+                await Cart.deleteOne({ cartId: cartId });
+
+                res.status(200).json({ msg: '<h3>Payment successful</h3>' });
+
+            } else {
+
+                res.status(400).json({ msg: '<h3>Payment verification failed</h3>' });
+            }
+        },
+        async getAllOrders(req, res) {
+
+            const token = req.headers.authorization?.split(' ')[1];
+            const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+            const { username } = decoded;
+            try {
+                const orders = await Order.find({ cartId: username }).sort({ createdAt: -1 });
+              
+                return res.status(200).json(orders);
+              } catch (error) {
+                return res.status(400).json({ msg: "<h3>Unable to Fetch Orders</h3>" });
+              }
 
 
 

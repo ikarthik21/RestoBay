@@ -19,9 +19,12 @@ const OrderSchema = new mongoose.Schema({
     status: {
         type: String
     },
+    cartId: {
+        type: String
+    },
     Items: [itemSchema]
 
-})
+}, { timestamps: true })
 
 
 const Order = mongoose.model('Order', OrderSchema);

@@ -11,7 +11,7 @@ const Admin = (req, res, next) => {
     }
     try {
         const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
-
+            
         // Extract the role from the decoded token
         const { role } = decoded;
 
