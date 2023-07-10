@@ -1,12 +1,12 @@
 import { Container, CartCheckBox, OrderTable, OrderRow, QtyBox, OrderItem } from '../Styles/Menu';
-import Payment from './Payment';
-import { makeOrder } from '../../Service/Api';
+import PaymentButton from './PaymentButton';
+import '../../App.css';
 
- 
 const CartComp = (props) => {
 
     const decQuan = props.decQuan;
     const incQuan = props.incQuan;
+
 
 
     const handleDecrement = (item) => {
@@ -22,28 +22,15 @@ const CartComp = (props) => {
         return <div>Loading...</div>;
     }
 
-    const handlePayment = async () => {
-        try {
-            const resp = await makeOrder(props.cart);
-            console.log(resp.data);
-
-        } catch (e) {
-            console.log(e);
-        }
-    }
 
 
 
     return (
         <Container>
-
             <CartCheckBox>
                 <h2>Order Summary</h2>
                 <div className='sp-undline'></div>
-
                 <OrderTable>
-
-
                     {
                         props.cart && props.cart?.Items?.map(item => {
 
@@ -94,19 +81,8 @@ const CartComp = (props) => {
                         <h2>Total</h2>
                         <h2 className="spl_num"> {props?.cart?.totalPrice}</h2>
                     </OrderRow>
-
-                    <div className='right_float'>
-                        <button className='right_float btn' onClick={handlePayment}>Pay</button>
-
-                    </div>
-
-                    <Payment cart={props.cart} />
-
-
-
+                    <PaymentButton cart={props.cart} />
                 </OrderTable>
-
-
             </CartCheckBox>
 
         </Container>

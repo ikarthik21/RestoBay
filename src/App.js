@@ -6,8 +6,10 @@ import Menu from './Components/Menu/Menu';
 import Login from './Components/Login/Login';
 import jwt_decode from 'jwt-decode';
 import Cookies from 'js-cookie';
-import Payment from './Components/Cart/Payment';
 import Admindash from './Components/Admin/Admindash';
+import AllOrders from './Components/Menu/AllOrders';
+import SingleOrder from './Components/Menu/SingleOrder';
+import { getAllOrders } from './Service/Api'
 
 function App() {
   const [userRole, setUserRole] = useState('');
@@ -29,6 +31,23 @@ function App() {
     }
   }, []);
 
+  const [orders, setOrders] = useState();
+
+  useEffect(() => {
+    const fetchAllOrders = async () => {
+      const res = await getAllOrders();
+      setOrders(res.data)
+    }
+
+    if (isAuth) {
+      fetchAllOrders();
+    }
+
+
+  }, [isAuth,orders]);
+
+
+
   return (
     <div >
       <Router>
@@ -39,7 +58,9 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/menu" element={<Menu userId={userId} />} />
               <Route path="/admin" element={<Admindash />} />
-              <Route path="/pay" element={<Payment />} />
+              <Route path="/allorders" element={<AllOrders orders={orders} />} />
+              <Route path="/orders/:oid" element={<SingleOrder orders={orders} />} />
+
             </>
           ) : (
             <>

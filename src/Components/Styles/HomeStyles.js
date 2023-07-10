@@ -103,6 +103,7 @@ p{
   align-items:center;
   justify-content:flex-start;
   min-width : 250px;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 h3{

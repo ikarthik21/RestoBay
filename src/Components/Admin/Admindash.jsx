@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Container, OrderRow } from '../Styles/Menu';
 import '../../App.css'
 import { AdminTable } from '../Styles/Adminstyles';
@@ -8,16 +8,13 @@ import { AdminTable } from '../Styles/Adminstyles';
 
 
 const Admindash = () => {
-      return (
+    return (
         <Container>
             <AdminTable>
                 <OrderRow>
                     <h1>Users</h1>
                 </OrderRow>
-
                 <OrderRow>
-
-
                 </OrderRow>
 
             </AdminTable>

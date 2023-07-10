@@ -26,10 +26,10 @@ export const loginUser = async (user) => {
    }
 
 }
-export const udateCart = async (cart) => {
+export const updateCart = async (cart) => {
    try {
 
-      return axios.post(`${curr_url}/update-cart`, cart);
+      return axios.post(`${curr_url}/updatecart`, cart);
    } catch (err) {
       console.log(err);
    }
@@ -39,7 +39,7 @@ export const udateCart = async (cart) => {
 export const getCart = async (cartidObj) => {
 
    try {
-      return await axios.post(`${curr_url}/get-cart`, cartidObj);
+      return await axios.post(`${curr_url}/getcart`, cartidObj);
    } catch (err) {
       console.log(err);
    }
@@ -60,8 +60,33 @@ export const getMenu = async () => {
 export const makeOrder = async (cart) => {
 
    try {
-      return await axios.post(`${curr_url}/create-order`,cart);
+      console.log(cart)
+      return await axios.post(`${curr_url}/payment/orders`, cart);
    } catch (err) {
+      console.log(err);
+   }
+
+}
+
+export const verifyPayment = async (data) => {
+
+   try {
+
+      return await axios.post(`${curr_url}/payment/success`, data);
+   }
+   catch (err) {
+      console.log(err);
+   }
+
+}
+
+export const getAllOrders = async () => {
+
+   try {
+
+      return await axios.get(`${curr_url}/getallorders`);
+   }
+   catch (err) {
       console.log(err);
    }
 

@@ -2,6 +2,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap');
 
 * {
   margin: 0;
@@ -57,6 +59,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
 }
 
 
@@ -134,7 +137,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .spl_num {
   color: #f95543;
-  ;
+   
 }
 
 .right_float {
@@ -154,7 +157,7 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 20px;
   font-size: 17px;
 }
- 
+
 
 .Image {
   height: 500px;
@@ -162,3 +165,77 @@ body::-webkit-scrollbar-thumb:hover {
   border: 2px solid green;
   margin: 10px 100px;
 }
+
+.applyFlex3 {
+  display: flex;
+
+}
+
+.applyFlex2 {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.marginBottom {
+  margin-bottom: 10px;
+}
+
+.sub_clr {
+  color: #3f3f3f;
+}
+
+.flexSpacebtw {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.font1 {
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #e11903;
+  font-family: "Kanit", sans-serif;
+}
+
+.fntfmly1 {
+
+  font-family: "Kanit", sans-serif;
+}
+.fntfmly2 {
+  color: #645655;
+  font-family: "Kanit", sans-serif;
+}
+
+.font2 {
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #1e1d1d;
+  font-family: monospace;
+
+}
+.font3 {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #645655;
+  font-family: monospace;
+
+}
+
+.floatRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0px 5px;
+}
+
+.flexSpacebtw2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+ 

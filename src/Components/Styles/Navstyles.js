@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import '../../App.css';
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 
 export const SLink = styled(Link)`
 text-decoration: none;
@@ -45,6 +47,7 @@ color: var(--logoColor);
  justify-content:center;
  height:43px;
  width: 80px;
+ font-family:var(--mainHead);
 margin: 0px 8px;
 background-color:white;
 border-radius: 13px;
@@ -59,3 +62,27 @@ right:0;
 z-index:10;
 
 `
+
+
+export const notyf = new Notyf({
+  duration: 3000,
+  position: {
+    x: 'right',
+    y: 'top',
+  },
+  types: [
+    {
+      type: 'error',
+      background: '#ef5644',
+      duration: 5000,
+      dismissible: true
+    },
+    {
+      type: 'info',
+      background: '#00adf1',
+      duration: 5000,
+      dismissible: true
+    }
+
+  ]
+});

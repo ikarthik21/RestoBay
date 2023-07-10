@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../../App.css'
 import { Allitems, Container, DescItem, FoodItem, SelectCat, QtyBox } from '../Styles/Menu';
-import { udateCart, getCart, getMenu } from '../../Service/Api'
+import { updateCart, getCart, getMenu } from '../../Service/Api'
 import { CartBox } from '../Styles/Navstyles';
 import { FaShoppingCart } from 'react-icons/fa'
 import CartComp from '../Cart/Cartcomp';
@@ -48,7 +48,7 @@ const Menu = (props) => {
     useEffect(() => {
         if (cart !== undefined) {
             const updCart = async () => {
-                await udateCart(cart);
+                await updateCart(cart);
             }
             updCart();
         }

@@ -5,6 +5,7 @@ margin-top:80px;
 display:flex; 
 flex-direction:column;
  
+ 
 `
 
 export const Allitems = styled.div`
@@ -12,7 +13,12 @@ display:flex;
 flex-wrap:wrap;
 align-items:center;
 justify-content:center;
+h1{
+  margin-bottom:1rem;
+  font-family: 'Kanit', sans-serif;
 
+  color: #ef5644;
+}
 
  
 `
@@ -20,7 +26,7 @@ justify-content:center;
 export const SelectCat = styled.div`
 display:flex;
 min-height:60px;
- 
+font-family:var(--mainHead);
  padding:0px 35px;
 ul{
     display:flex;    
@@ -42,7 +48,7 @@ li{
 `
 export const FoodItem = styled.div`
   min-width:270px;
- 
+  font-family:var(--mainHead);
  img{
     height:165px;
     width:240px;
@@ -60,6 +66,8 @@ h3{
     margin:8px 8px;
     color:#3f3f3f;
     font-size: 19px;
+   
+    letter-spacing:1.5px;
 }
 background-color: #fde4c7;
 border-radius:10px;
@@ -142,6 +150,9 @@ span{
 export const CartCheckBox = styled.div`
 padding: 15px 40px;
 color:#3f3f3f;
+font-family:var(--mainHead);
+letter-spacing:1.5px;
+letter-spacing:1.5px;
 
 `
 export const OrderTable = styled.div`
@@ -150,6 +161,8 @@ padding: 15px 40px;
 margin : 10px 30px;
 display: flex;
 flex-direction :column;
+ 
+
 
 
 
