@@ -3,6 +3,7 @@ import UserController from '../app/controllers/UserController.js';
 import CartController from '../app/controllers/CartController.js';
 import OrderController from '../app/controllers/OrderController.js';
 import Auth from '../app/middlewares/Auth.js';
+import TableController from '../app/controllers/TableController.js';
 const router = express.Router();
 
 
@@ -27,6 +28,11 @@ router.post('/payment/orders', OrderController().createOrder);
 router.post('/payment/success', OrderController().verifyPayment);
 
 router.get('/getallorders', OrderController().getAllOrders);
+
+router.get('/gettables', TableController().getTables);
+
+
+router.post('/booktable', TableController().bookTable);
 
 
 
