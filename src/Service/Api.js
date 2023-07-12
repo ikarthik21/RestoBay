@@ -92,3 +92,25 @@ export const getAllOrders = async () => {
 
 }
 
+export const getTables = async () => {
+
+   try {
+      return await axios.get(`${curr_url}/gettables`);
+   }
+   catch (err) {
+      console.log(err);
+   }
+
+}
+
+export const bookTable = async (booking) => {
+
+   try {
+      return await axios.post(`${curr_url}/booktable`, booking);
+   }
+   catch (err) {
+      console.log(err);
+   }
+
+}
+

@@ -35,7 +35,6 @@ body {
   transition: transform 0.5s;
   cursor: pointer;
   border: 3px solid #ef5644;
-
   letter-spacing: 1px;
   font-family: var(--mainHead);
 }
@@ -137,7 +136,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .spl_num {
   color: #f95543;
-   
+
 }
 
 .right_float {
@@ -203,6 +202,7 @@ body::-webkit-scrollbar-thumb:hover {
 
   font-family: "Kanit", sans-serif;
 }
+
 .fntfmly2 {
   color: #645655;
   font-family: "Kanit", sans-serif;
@@ -216,6 +216,7 @@ body::-webkit-scrollbar-thumb:hover {
   font-family: monospace;
 
 }
+
 .font3 {
   font-size: 18px;
   font-weight: bold;
@@ -234,8 +235,20 @@ body::-webkit-scrollbar-thumb:hover {
 
 .flexSpacebtw2 {
   display: flex;
+
   justify-content: space-between;
 }
 
+.flexSpaceAround {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 
- 
+
+.tableNo {
+  font-size: 5rem;
+  font-family: "Kanit", sans-serif;
+  color: #474747;
+  letter-spacing: 1.2px;
+}

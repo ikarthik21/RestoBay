@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 import Admindash from './Components/Admin/Admindash';
 import AllOrders from './Components/Menu/AllOrders';
 import SingleOrder from './Components/Menu/SingleOrder';
+import TableBooking from './Components/Table/TableBooking';
 import { getAllOrders } from './Service/Api'
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
     }
 
 
-  }, [isAuth,orders]);
+  }, [isAuth, orders]);
 
 
 
@@ -58,6 +59,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/menu" element={<Menu userId={userId} />} />
               <Route path="/admin" element={<Admindash />} />
+              <Route path="/tables" element={<TableBooking />} />
               <Route path="/allorders" element={<AllOrders orders={orders} />} />
               <Route path="/orders/:oid" element={<SingleOrder orders={orders} />} />
 
