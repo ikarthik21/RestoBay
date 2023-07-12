@@ -45,7 +45,7 @@ const Home = () => {
 
                 <Menu isOpen={isOpen}>
                   <StartOpSel  >
-                    <Link className='applyFlexCol'>
+                    <Link className='applyFlexCol' to='/tables' >
                       <MdTableBar color='white' size={30} />
                       <p>Book Table</p>
                     </Link>
