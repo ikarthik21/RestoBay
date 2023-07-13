@@ -79,11 +79,20 @@ export const verifyPayment = async (data) => {
    }
 
 }
-
-export const getAllOrders = async () => {
+export const verifyTablePayment = async (data) => {
 
    try {
 
+      return await axios.post(`${curr_url}/payment/table/success`, data);
+   }
+   catch (err) {
+      console.log(err);
+   }
+
+}
+
+export const getAllOrders = async () => {
+   try {
       return await axios.get(`${curr_url}/getallorders`);
    }
    catch (err) {
@@ -103,6 +112,9 @@ export const getTables = async () => {
 
 }
 
+
+
+
 export const bookTable = async (booking) => {
 
    try {
@@ -113,4 +125,19 @@ export const bookTable = async (booking) => {
    }
 
 }
+
+
+
+export const getallTablebooks = async () => {
+
+   try {
+      return await axios.get(`${curr_url}/getalltablebooks`);
+   }
+   catch (err) {
+      console.log(err);
+   }
+
+}
+
+
 

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from '../Styles/Menu';
 import { TableBookBox, TableItem, TablesBox } from '../Styles/Table';
-import { getTables, bookTable } from '../../Service/Api';
-import { notyf } from '../Styles/Navstyles';
-
+import { getTables } from '../../Service/Api';
+import Payment from './Payment';
 import '../../App.css'
+
 const TableBooking = () => {
+
     const [tables, setTables] = useState();
-    const [table, setTable] = useState({ tableId: "", tableno: null, version: null });
     const [booking, setBooking] = useState({
-        date: "",
+        tableId: "", tableno: null, version: null, date: "",
         starttime: "",
         endtime: ""
     });
@@ -33,54 +33,7 @@ const TableBooking = () => {
 
     const handleBooking = async () => {
 
-        const currentDate = new Date().setHours(0, 0, 0, 0);
-        
-        const selectedDate = new Date(booking.date).setHours(0, 0, 0, 0);
 
-        if (table.tableId === "" || table.tableno === null) {
-
-            notyf.open({
-                type: 'error',
-                message: "Please select a table"
-            });
-
-        }
-        else if (booking.starttime === "" || booking.date === "" || booking.endtime === "") {
-
-            notyf.open({
-                type: 'error',
-                message: "Please fill in all details"
-            });
-
-        }
-        else if (currentDate > selectedDate) {
-            notyf.open({
-                type: 'error',
-                message: "Please select a valid date"
-            });
-
-
-        }
-        else if (booking.starttime >= booking.endtime) {
-            notyf.open({
-                type: 'error',
-                message: "Please select a valid time range"
-
-            })
-        }
-        else {
-            const tb_book = { ...table, ...booking };
-            try {
-                const resp = await bookTable(tb_book);
-                notyf.open({
-                    type: 'error',
-                    message: resp.data.message
-                })
-            }
-            catch (error) {
-                console.log(error);
-            }
-        }
     };
 
     return (
@@ -90,9 +43,10 @@ const TableBooking = () => {
                 <TablesBox>
                     {
                         tables && tables.map(table => {
-                            return <TableItem key={table.tableId} onClick={() => {
-                                setTable({ tableId: table.tableId, tableno: table.tableno, version: table.version })
-                            }}>
+                            return <TableItem key={table.tableId}
+                                onClick={() => {
+                                    setBooking({ ...booking, tableId: table.tableId, tableno: table.tableno, version: table.version });
+                                }}>
                                 <h1>{table.tableno}</h1>
                                 <img src="/images/table.png" alt="" />
                             </TableItem>
@@ -102,7 +56,7 @@ const TableBooking = () => {
                 </TablesBox>
 
                 <TableBookBox>
-                    <h1 className='tableNo'>{table.tableno}</h1>
+                    <h1 className='tableNo'>{booking.tableno}</h1>
 
                     <p>Date</p>
                     <input type="date" name='date' onChange={readInp} />
@@ -124,7 +78,6 @@ const TableBooking = () => {
                                 <option value="09:00">9:00</option>
                                 <option value="10:00">10:00</option>
                                 <option value="11:00">11:00</option>
-
                             </select>
                         </div>
 
@@ -149,7 +102,9 @@ const TableBooking = () => {
                         </div>
 
                     </div>
-                    <button onClick={handleBooking}>Book Table</button>
+
+                    <Payment onClick={handleBooking} booking={booking} />
+                    
                 </TableBookBox>
 
 

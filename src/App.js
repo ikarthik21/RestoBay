@@ -8,10 +8,9 @@ import jwt_decode from 'jwt-decode';
 import Cookies from 'js-cookie';
 import Admindash from './Components/Admin/Admindash';
 import AllOrders from './Components/Menu/AllOrders';
-import SingleOrder from './Components/Menu/SingleOrder';
 import TableBooking from './Components/Table/TableBooking';
-import { getAllOrders } from './Service/Api'
-
+import { getAllOrders } from './Service/Api';
+import AllTableOrders from './Components/Table/AllTableOrders';
 function App() {
   const [userRole, setUserRole] = useState('');
   const [isAuth, setIsAuth] = useState(false);
@@ -39,12 +38,9 @@ function App() {
       const res = await getAllOrders();
       setOrders(res.data)
     }
-
     if (isAuth) {
       fetchAllOrders();
     }
-
-
   }, [isAuth, orders]);
 
 
@@ -61,7 +57,7 @@ function App() {
               <Route path="/admin" element={<Admindash />} />
               <Route path="/tables" element={<TableBooking />} />
               <Route path="/allorders" element={<AllOrders orders={orders} />} />
-              <Route path="/orders/:oid" element={<SingleOrder orders={orders} />} />
+              <Route path="/alltableorders" element={<AllTableOrders />} />
 
             </>
           ) : (
