@@ -21,9 +21,7 @@ router.post('/getcart', CartController().getCart);
 
 router.get('/getmenu', CartController().getMenu);
 
-
 router.post('/payment/orders', OrderController().createOrder);
-
 
 router.post('/payment/success', OrderController().verifyPayment);
 
@@ -31,8 +29,12 @@ router.get('/getallorders', OrderController().getAllOrders);
 
 router.get('/gettables', TableController().getTables);
 
-
 router.post('/booktable', TableController().bookTable);
+
+router.post('/payment/table/success', TableController().verifybookTable);
+
+router.get('/getalltablebooks', TableController().getallTableOrder);
+
 
 
 

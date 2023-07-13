@@ -7,8 +7,7 @@ import Order from "../models/OrderSchema.js";
 import Cart from "../models/CartSchema.js";
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
-dotenv.config();
-
+ 
 
 
 const razorpay = new Razorpay({
