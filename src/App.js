@@ -6,11 +6,15 @@ import Menu from './Components/Menu/Menu';
 import Login from './Components/Login/Login';
 import jwt_decode from 'jwt-decode';
 import Cookies from 'js-cookie';
-import Admindash from './Components/Admin/Admindash';
+import AdminOrders from './Components/Admin/AdminOrders';
 import AllOrders from './Components/Menu/AllOrders';
 import TableBooking from './Components/Table/TableBooking';
 import { getAllOrders } from './Service/Api';
 import AllTableOrders from './Components/Table/AllTableOrders';
+import AdminTables from './Components/Admin/AdminTables';
+import Admin from './Components/Admin/Admin';
+
+
 function App() {
   const [userRole, setUserRole] = useState('');
   const [isAuth, setIsAuth] = useState(false);
@@ -54,10 +58,12 @@ function App() {
             <>
               <Route path="/" element={<Home />} />
               <Route path="/menu" element={<Menu userId={userId} />} />
-              <Route path="/admin" element={<Admindash />} />
               <Route path="/tables" element={<TableBooking />} />
               <Route path="/allorders" element={<AllOrders orders={orders} />} />
               <Route path="/alltableorders" element={<AllTableOrders />} />
+              <Route path="/admin/orders" element={<AdminOrders />} />
+              <Route path="/admin/tables" element={<AdminTables />} />
+              <Route path="/admin" element={<Admin />} />
 
             </>
           ) : (

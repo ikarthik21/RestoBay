@@ -38,7 +38,8 @@ const Menu = (props) => {
     useEffect(() => {
         const getcart = async (cartobj) => {
             const resp = await getCart(cartobj);
-            setCart(resp.data)
+            console.log(resp.data.cart);
+            setCart(resp.data.cart);
         }
         getcart({ cartid: props.userId });
 

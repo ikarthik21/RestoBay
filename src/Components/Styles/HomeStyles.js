@@ -52,7 +52,7 @@ export const StartOpSel = styled.div`
 display:flex; 
 align-items:center;
 justify-content :space-around;
-border:2px solid red;
+ 
 a{
   text-decoration:none;
   color:black;

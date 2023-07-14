@@ -141,3 +141,37 @@ export const getallTablebooks = async () => {
 
 
 
+
+
+
+// Admin Routes 
+
+
+// Route to get all food  orders 
+
+export const getOrders = async () => {
+
+   try {
+      return await axios.get(`${curr_url}/foodorders`);
+   }
+   catch (err) {
+      console.log(err);
+   }
+
+}
+
+
+// Route to get all table orders
+
+export const getTableOrders = async () => {
+
+   try {
+      return await axios.get(`${curr_url}/tableorders`);
+   }
+   catch (err) {
+      console.log(err);
+   }
+
+}
+
+
