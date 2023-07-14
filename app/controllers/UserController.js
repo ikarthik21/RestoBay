@@ -64,7 +64,6 @@ const UserController = () => {
                             process.env.TOKEN_SECRET
                         );
 
-
                         return res.json({ token, message: '<h3> Login successful😊 </h3> ' })
                     }
                     else {

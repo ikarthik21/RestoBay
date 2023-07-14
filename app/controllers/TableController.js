@@ -1,5 +1,6 @@
 import Tables from '../models/TableSchema.js';
 import Razorpay from 'razorpay';
+import UserRegister from '../models/UserSchema.js';
 import dotenv from 'dotenv';
 dotenv.config();
 import jwt from 'jsonwebtoken';
@@ -24,8 +25,30 @@ const TableController = () => {
         },
         async bookTable(req, res) {
 
+            const token = req.headers.authorization?.split(' ')[1];
+            const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+            const { username } = decoded;
+
+            const { tableId, tableno, date, endtime, starttime, version } = req.body;
+
+
+            // Check if the table payement already exists
+
             try {
-                const { tableId, tableno, date, endtime, starttime, version } = req.body;
+                const existingorder = await TableOrder.findOne({ userId: username, tableno: tableno, endtime: endtime, starttime: starttime, date: date });
+                return res.status(200).json({
+                    orderId: existingorder.orderId,
+                    amount: existingorder.totalPrice,
+                });
+            }
+            catch (error) {
+                console.log(error)
+            }
+
+
+            // check for table is available at that instance
+
+            try {
 
                 const table = await Tables.findOne({ tableId: tableId });
 
@@ -52,21 +75,17 @@ const TableController = () => {
                 }
 
                 const duration = parseInt(endtime.split(':')) - parseInt(starttime.split(':'));
-
                 const totalPrice = duration * 100;
-
-
                 const razorpayOrder = await razorpay.orders.create({
                     amount: totalPrice * 100,
                     currency: 'INR',
                 });
 
-                const token = req.headers.authorization?.split(' ')[1];
-                const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
-                const { username } = decoded;
-
+                // Create a new order and store it in the db
 
                 try {
+
+                    const tables = await UserRegister.findOne({ _id: username }, { name: 1, email: 1, phone: 1, _id: 0 });
                     const order = new TableOrder({
                         orderId: razorpayOrder.id,
                         totalPrice: totalPrice,
@@ -76,11 +95,13 @@ const TableController = () => {
                         starttime: starttime,
                         endtime: endtime,
                         status: "payment pending",
-                        userId: username
+                        userId: username,
+                        name: tables.name,
+                        email: tables.email,
+                        phone: tables.phone
                     });
 
                     await order.save();
-
 
                     return res.status(200).json({
                         orderId: razorpayOrder.id,
@@ -91,13 +112,9 @@ const TableController = () => {
                 catch (error) {
                     console.log(error);
                 }
-
-
                 return res.json({
                     message: 'Try after sometime'
                 })
-
-
 
             } catch (error) {
                 console.error(error);
@@ -105,8 +122,6 @@ const TableController = () => {
             }
         },
         async verifybookTable(req, res) {
-
-
 
             const { orderCreationId, razorpayPaymentId, date, starttime, endtime, razorpayOrderId, razorpaySignature, tableId } = req.body;
 
@@ -127,7 +142,7 @@ const TableController = () => {
                 res.status(200).json({ message: '<h3>Payment successful Table booked Successfuly</h3>' });
 
             } else {
-
+                await TableOrder.deleteOne({ orderId: razorpayOrderId });
                 res.status(400).json({ message: '<h3>Payment verification failed</h3>' });
             }
 

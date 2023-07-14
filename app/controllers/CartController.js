@@ -1,6 +1,5 @@
-import Cart from '../models/CartSchema.js';
 import Menu from '../models/MenuSchema.js';
-import Order from '../models/OrderSchema.js';
+import UserRegister from '../models/UserSchema.js';
 
 const CartController = () => {
 
@@ -8,35 +7,25 @@ const CartController = () => {
 
         async update(req, res) {
             const cart = req.body;
-            let existingCart = await Cart.findOne({ cartId: cart.cartId });
-            if (existingCart) {
-                if (existingCart.totalItems === 0) {
-                    await Order.deleteOne({ cartId: cart.cartId });
-                }
-                await Cart.findOneAndUpdate({ cartId: cart.cartId }, cart);
+            try {
+                await UserRegister.findOneAndUpdate({ _id: cart.cartId }, { cart: cart });
             }
-            else {
-                try {
-                    const newCart = new Cart(cart);
-                    await newCart.save();
-                }
-                catch (err) {
-                    console.log(err);
-                }
+            catch (error) {
+                console.log(error);
             }
         },
         async getCart(req, res) {
             const { cartid } = req.body;
-            let cart = await Cart.findOne({ cartId: cartid });
+            let cart = await UserRegister.findOne({ _id: cartid }, { cart: 1 });
             if (cart) {
                 return res.status(200).json(cart);
             }
-
+            return res.json({ message: 'Cart not found' });
         },
         async getBill(req, res) {
             const { cartId, totalPrice } = req.body;
-            console.log(cartId, totalPrice)
-            let cart = await Cart.findOne({ cartId: cartId });
+
+            let cart = await UserRegister.findOne({ _id: cartId }, { cart: 1 });
 
             if (cart) {
                 if (cart.totalPrice === totalPrice) {
@@ -49,13 +38,17 @@ const CartController = () => {
             return res.status(400).json({ message: "payment failed" });
         },
         async getMenu(req, res) {
-            let menu = await Menu.find();
-            return res.status(200).json(menu);
+            try {
+                let menu = await Menu.find();
+                return res.status(200).json(menu);
+            } catch (error) {
+                console.log(error);
+            }
 
         }
 
     }
-    
+
 }
 
 export default CartController;
