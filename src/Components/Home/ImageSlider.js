@@ -74,7 +74,7 @@ const Carousel = styled(Slider)`
 
   img{
     height: 620px;
-    width : 98.5vw;
+    width : 93vw;
     border-radius: 20px;
   }
 

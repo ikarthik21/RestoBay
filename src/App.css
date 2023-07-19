@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600;700&display=swap');
 
 * {
   margin: 0;
@@ -29,6 +30,7 @@ body {
 
 .mainBtStyle {
   background-color: #ef5644;
+
   padding: 10px 19px;
   border-radius: 3px;
   color: whitesmoke;
@@ -73,6 +75,7 @@ body::-webkit-scrollbar-thumb {
 
 body::-webkit-scrollbar-thumb:hover {
   background-color: #ef5644;
+  background-color: #e4e4e4;
 
 }
 
@@ -212,7 +215,7 @@ body::-webkit-scrollbar-thumb:hover {
 .font2 {
   font-size: 15px;
   font-weight: bold;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   color: #1e1d1d;
   font-family: monospace;
 
@@ -260,7 +263,7 @@ body::-webkit-scrollbar-thumb:hover {
   letter-spacing: 1.5px;
 
 }
- 
+
 
 .font5 {
   font-size: 1.5rem;
@@ -268,4 +271,9 @@ body::-webkit-scrollbar-thumb:hover {
   letter-spacing: 1px;
   color: #e11903;
   font-family: "Kanit", sans-serif;
+}
+
+.logoutst1 {
+  color: white;
+  cursor: pointer;
 }

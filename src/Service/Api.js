@@ -175,3 +175,15 @@ export const getTableOrders = async () => {
 }
 
 
+export const getAllUsers = async () => {
+
+   try {
+      return await axios.get(`${curr_url}/allusers`);
+   }
+   catch (err) {
+      console.log(err);
+   }
+
+}
+
+

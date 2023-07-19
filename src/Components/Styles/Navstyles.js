@@ -30,6 +30,7 @@ font-family: var(--logoHead);
 color : var(--mainColor);
 letter-spacing  :0.51px;
 padding : 8px 8px;
+margin-left:5rem;
 `
 
 export const SignBox = styled.div`
@@ -86,3 +87,56 @@ export const notyf = new Notyf({
 
   ]
 });
+
+
+
+export const SideBar = styled.div`
+height:100vh;
+background-color:#ff644f;
+color : red;
+z-index:4;
+position:fixed;
+top:0;
+left :0;
+diplay:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+width:3.5rem;
+&:hover{
+  width:15rem;
+  transition: width 0.5s ease-in-out;
+} 
+overflow:hidden;
+padding: 5rem 0.5rem;
+a{
+
+  text-decoration:none;
+  color:white;  
+}
+
+
+`
+
+
+export const LinkItem = styled.div`
+ display: flex;
+ align-items:center;
+ min-width:15rem;
+ p{
+  margin-left:2rem;
+  font-size:1rem;
+  width:10rem;  
+  font-family: 'Josefin Sans', sans-serif;
+  letter-spacing:1.2px;
+  font-weight:bold;
+}
+  margin-bottom:1.8rem;
+  &:hover{
+     color: red;
+  }
+
+
+`
+
+

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormItem } from '../Styles/HomeStyles';
+import { FormItem, AllSecWrap } from '../Styles/HomeStyles';
 import '../../App.css'
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
@@ -136,7 +136,7 @@ const Login = () => {
     }
 
     return (
-        <>
+        <AllSecWrap>
             <SignBox>
                 {
                     Loginpg ? <LogBox style={{ padding: '100px 20px' }}>
@@ -207,7 +207,7 @@ const Login = () => {
                     <img src="/images/chef.png" alt="" />
                 </Imagebox>
             </SignBox>
-        </>
+        </AllSecWrap>
     )
 }
 

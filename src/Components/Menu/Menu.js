@@ -6,6 +6,8 @@ import { CartBox } from '../Styles/Navstyles';
 import { FaShoppingCart } from 'react-icons/fa'
 import CartComp from '../Cart/Cartcomp';
 import Modal from '../Cart/Modal';
+import { AllSecWrap } from '../Styles/HomeStyles';
+
 
 
 const Menu = (props) => {
@@ -138,78 +140,81 @@ const Menu = (props) => {
 
     return (
 
-        <Container >
-            <CartBox onClick={toggleCartModal}>
-                <FaShoppingCart style={{ color: '#ef5644' }} size={22} />
-                <h4>{cart?.Items.length}</h4>
-            </CartBox>
 
-            {cartshow && (
-                <Modal onClose={toggleCartModal}>
-                    <CartComp cart={cart} decQuan={decQuan} incQuan={incQuan} />
-                </Modal>
-            )}
+        <AllSecWrap>
+            <Container >
+                <CartBox onClick={toggleCartModal}>
+                    <FaShoppingCart style={{ color: '#ef5644' }} size={22} />
+                    <h4>{cart?.Items.length}</h4>
+                </CartBox>
 
-            <SelectCat className={cartshow ? "appblur" : ""} >
-                <ul>
-                    <li onClick={() => { setitemCat("") }}>All</li>
-                    <li onClick={() => { setitemCat("south") }}>South</li>
-                    <li onClick={() => { setitemCat("north") }}>North</li>
-                    <li onClick={() => { setitemCat("dessert") }}>Dessert</li>
-                </ul>
-            </SelectCat>
+                {cartshow && (
+                    <Modal onClose={toggleCartModal}>
+                        <CartComp cart={cart} decQuan={decQuan} incQuan={incQuan} />
+                    </Modal>
+                )}
 
-            {
-                menu ? <Allitems className={cartshow ? "appblur" : ""}>
-                    {
-                        itemDisplay === "all" ?
-                            menu.map((item) => {
-                                const cartItem = cart?.Items.find((cartItem) => cartItem.item_id === item.item_id);
-                                return (
-                                    <FoodItem key={item.item_id}>
-                                        <img src={`/images/${item.image}`} alt="" />
-                                        <h3>{item.name}</h3>
-                                        <DescItem>
-                                            <h4> Rs.<span>{item.price}</span></h4>
-                                            <button onClick={() => addItem(item)}>add</button>
-                                            {
-                                                cartItem &&
-                                                <QtyBox>
-                                                    <div onClick={() => { decQuan(item) }}>-</div>
-                                                    <span>{cartItem.quantity}</span>
-                                                    <div onClick={() => { incQuan(item) }}>+</div>
-                                                </QtyBox>
-                                            }
-                                        </DescItem>
-                                    </FoodItem>
-                                );
-                            })
-                            : menu.filter(item => item.category === itemCat).map((item) => {
-                                const cartItem = cart?.Items.find((cartItem) => cartItem.item_id === item.item_id);
+                <SelectCat className={cartshow ? "appblur" : ""} >
+                    <ul>
+                        <li onClick={() => { setitemCat("") }}>All</li>
+                        <li onClick={() => { setitemCat("south") }}>South</li>
+                        <li onClick={() => { setitemCat("north") }}>North</li>
+                        <li onClick={() => { setitemCat("dessert") }}>Dessert</li>
+                    </ul>
+                </SelectCat>
 
-                                return (
-                                    <FoodItem key={item.item_id}>
-                                        <img src={`/images/${item.image}`} alt="" />
-                                        <h3>{item.name}</h3>
-                                        <DescItem>
-                                            <h4> Rs.<span>{item.price}</span></h4>
-                                            <button onClick={() => addItem(item)}>add</button>
-                                            {cartItem &&
-                                                <QtyBox>
-                                                    <div onClick={() => { decQuan(item) }}>  -</div>
-                                                    <span  >{cartItem.quantity}</span>
-                                                    <div onClick={() => { incQuan(item) }}>+</div>
-                                                </QtyBox>
-                                            }
-                                        </DescItem>
-                                    </FoodItem>
-                                );
-                            })
-                    }
-                </Allitems> : ""
+                {
+                    menu ? <Allitems className={cartshow ? "appblur" : ""}>
+                        {
+                            itemDisplay === "all" ?
+                                menu.map((item) => {
+                                    const cartItem = cart?.Items.find((cartItem) => cartItem.item_id === item.item_id);
+                                    return (
+                                        <FoodItem key={item.item_id}>
+                                            <img src={`/images/${item.image}`} alt="" />
+                                            <h3>{item.name}</h3>
+                                            <DescItem>
+                                                <h4> Rs.<span>{item.price}</span></h4>
+                                                <button onClick={() => addItem(item)}>add</button>
+                                                {
+                                                    cartItem &&
+                                                    <QtyBox>
+                                                        <div onClick={() => { decQuan(item) }}>-</div>
+                                                        <span>{cartItem.quantity}</span>
+                                                        <div onClick={() => { incQuan(item) }}>+</div>
+                                                    </QtyBox>
+                                                }
+                                            </DescItem>
+                                        </FoodItem>
+                                    );
+                                })
+                                : menu.filter(item => item.category === itemCat).map((item) => {
+                                    const cartItem = cart?.Items.find((cartItem) => cartItem.item_id === item.item_id);
 
-            }
-        </Container >
+                                    return (
+                                        <FoodItem key={item.item_id}>
+                                            <img src={`/images/${item.image}`} alt="" />
+                                            <h3>{item.name}</h3>
+                                            <DescItem>
+                                                <h4> Rs.<span>{item.price}</span></h4>
+                                                <button onClick={() => addItem(item)}>add</button>
+                                                {cartItem &&
+                                                    <QtyBox>
+                                                        <div onClick={() => { decQuan(item) }}>  -</div>
+                                                        <span  >{cartItem.quantity}</span>
+                                                        <div onClick={() => { incQuan(item) }}>+</div>
+                                                    </QtyBox>
+                                                }
+                                            </DescItem>
+                                        </FoodItem>
+                                    );
+                                })
+                        }
+                    </Allitems> : ""
+
+                }
+            </Container >
+        </AllSecWrap>
     )
 }
 

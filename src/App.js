@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Components/Home/Home';
 import Navbar from './Components/Navbar/Navbar';
+import SideNav from './Components/Navbar/SideNav';
 import Menu from './Components/Menu/Menu';
 import Login from './Components/Login/Login';
 import jwt_decode from 'jwt-decode';
@@ -13,7 +14,7 @@ import { getAllOrders } from './Service/Api';
 import AllTableOrders from './Components/Table/AllTableOrders';
 import AdminTables from './Components/Admin/AdminTables';
 import Admin from './Components/Admin/Admin';
-
+import AdminUsers from './Components/Admin/AdminUsers';
 
 function App() {
   const [userRole, setUserRole] = useState('');
@@ -52,6 +53,7 @@ function App() {
   return (
     <div >
       <Router>
+        <SideNav />
         <Navbar isAuth={isAuth} />
         <Routes>
           {isAuth && (userRole === "admin" || userRole === "customer") ? (
@@ -63,6 +65,7 @@ function App() {
               <Route path="/alltableorders" element={<AllTableOrders />} />
               <Route path="/admin/orders" element={<AdminOrders />} />
               <Route path="/admin/tables" element={<AdminTables />} />
+              <Route path="/admin/users" element={<AdminUsers />} />
               <Route path="/admin" element={<Admin />} />
 
             </>

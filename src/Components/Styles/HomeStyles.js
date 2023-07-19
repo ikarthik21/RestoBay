@@ -1,6 +1,11 @@
 import styled from "styled-components"
 
 
+export const AllSecWrap = styled.div`
+margin-left:4rem;
+
+`
+
 export const MainSection = styled.div`
 display :flex;
 align-items:center;
@@ -9,6 +14,7 @@ margin-top:5rem;
 padding-right:7rem;
 justify-content:center;
 `
+
 export const Imagebox = styled.div` 
 img{
   height:22rem;
