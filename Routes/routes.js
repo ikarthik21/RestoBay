@@ -70,6 +70,9 @@ router.get('/tableorders', AdminController().tablebooks);
 // route to get all the food orders  for admin
 router.get('/foodorders', AdminController().foodorders);
 
+// route to get all the users
+router.get('/allusers', AdminController().allUsers);
+
 
 
 
