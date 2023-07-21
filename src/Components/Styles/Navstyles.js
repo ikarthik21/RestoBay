@@ -107,6 +107,7 @@ width:3.5rem;
   width:15rem;
   transition: width 0.5s ease-in-out;
 } 
+transition: width 0.5s ease-in-out;
 overflow:hidden;
 padding: 5rem 0.5rem;
 a{

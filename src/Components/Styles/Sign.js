@@ -25,3 +25,12 @@ input{
 export const Imagebox = styled.div`
 margin:20px 20px;
 `
+export const InnerBox = styled.div`
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ img{
+  height : 50vh;
+  width : 20vw;
+ }
+`

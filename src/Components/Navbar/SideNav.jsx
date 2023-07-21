@@ -1,16 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { SideBar, LinkItem } from '../Styles/Navstyles';
 import { Link } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai'
-import { BiSolidFoodMenu } from 'react-icons/bi'
-import { FaSignOutAlt } from 'react-icons/fa'
+import { BiSolidFoodMenu ,BiSolidLogIn} from 'react-icons/bi'
+import { FaSignOutAlt, FaUserAlt } from 'react-icons/fa'
 import { HiUsers } from 'react-icons/hi'
 import { MdTableBar, MdFastfood, MdTableRestaurant } from 'react-icons/md';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 
 import '../../App.css'
 const SideNav = () => {
+
+
+    const [role, setRole] = useState();
+    const [Auth, setIsAuth] = useState(false);
 
     const navigate = useNavigate();
     const logout = () => {
@@ -20,6 +25,21 @@ const SideNav = () => {
         navigate('/');
         window.location.reload();
     }
+
+    useEffect(() => {
+        const token = Cookies.get('token');
+        if (token) {
+            const decodedToken = jwt_decode(token);
+            const { role } = decodedToken;
+            if (role === "admin" || role === "customer") {
+                setRole(role)
+                setIsAuth(true);
+            }
+        }
+    }, []);
+
+
+
     return (
         <SideBar>
             <Link to="/">
@@ -52,13 +72,35 @@ const SideNav = () => {
                 </LinkItem>
             </Link>
 
-            <Link to="/admin/users">
-                <LinkItem>
-                    <HiUsers size={30} color='white' />
-                    <p>Users</p>
-                </LinkItem>
-            </Link>
 
+
+            {
+                role === "admin" ?
+                    <>
+                        <Link to="/admin/orders">
+                            <LinkItem>
+                                <MdFastfood size={32} color='white' />
+                                <p>All Orders</p>
+
+                            </LinkItem>
+                        </Link>
+                        <Link to="/admin/tables">
+                            <LinkItem>
+                                <MdTableRestaurant size={32} color='white' />
+                                <p>All Tables</p>
+
+                            </LinkItem>
+                        </Link>
+                        <Link to="/admin/users">
+                            <LinkItem>
+                                <HiUsers size={30} color='white' />
+                                <p>Users</p>
+                            </LinkItem>
+                        </Link>
+
+
+                    </> : ""
+            }
             <Link to="/alltableorders">
                 <LinkItem>
                     <MdTableRestaurant size={32} color='white' />
@@ -66,26 +108,39 @@ const SideNav = () => {
 
                 </LinkItem>
             </Link>
-            <Link to="/admin/orders">
-                <LinkItem>
-                    <MdFastfood size={32} color='white' />
-                    <p>All Orders</p>
 
-                </LinkItem>
-            </Link>
-            <Link to="/admin/tables">
+            <Link to="/profile">
                 <LinkItem>
-                    <MdTableRestaurant size={32} color='white' />
-                    <p>All Tables</p>
+                    <FaUserAlt size={30} color='white' />
+                    <p>Profile</p>
 
                 </LinkItem>
             </Link>
 
 
-            <LinkItem onClick={logout} className='logoutst1'>
-                <FaSignOutAlt size={30} color='white' />
-                <p>Logout</p>
-            </LinkItem>
+            {
+
+                Auth ?
+                    <LinkItem onClick={logout} className='logoutst1'>
+                        <FaSignOutAlt size={30} color='white' />
+                        <p>Logout</p>
+                    </LinkItem>
+                    :
+                    <LinkItem onClick={() => {
+                        navigate('/login');
+                    }} className='logoutst1'>
+                        <BiSolidLogIn size={30} color='white' />
+                        <p>Login</p>
+                    </LinkItem>
+
+            }
+
+
+
+
+
+
+
 
 
         </SideBar>

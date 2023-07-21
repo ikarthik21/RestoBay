@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getAllUsers } from '../../Service/Api';
-import { AdminTable, TableRow, TableInnerRow, SingleRow, SingleOrder } from '../Styles/Adminstyles';
+import { AdminTable, TableRow, TableInnerRow } from '../Styles/Adminstyles';
 import moment from 'moment';
 import '../../App.css';
 import { Allitems, Container } from '../Styles/Menu'
 import { MdVerified } from 'react-icons/md'
 import { ImCross } from 'react-icons/im'
-import {AllSecWrap} from '../Styles/HomeStyles';
+import { AllSecWrap } from '../Styles/HomeStyles';
 
 
 
@@ -18,7 +18,6 @@ const AdminUsers = () => {
         const fetchTableorders = async () => {
             const resp = await getAllUsers();
             setUsers(resp.data);
-            console.log(resp.data);
 
         }
         fetchTableorders();

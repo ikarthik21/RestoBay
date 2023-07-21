@@ -141,6 +141,81 @@ export const getallTablebooks = async () => {
 
 
 
+export const getProfile = async () => {
+
+   try {
+      return await axios.get(`${curr_url}/getprofile`);
+   }
+   catch (err) {
+      console.log(err);
+   }
+
+}
+
+export const editProfile = async (user) => {
+
+   try {
+
+      return await axios.post(`${curr_url}/editprofile`, user);
+   }
+   catch (err) {
+      console.log(err);
+   }
+
+}
+
+// Forget password 
+
+export const forgetPassword = async (email) => {
+
+   try {
+
+      return await axios.post(`${curr_url}/forget/password`, email);
+   }
+   catch (err) {
+      console.log(err);
+   }
+
+}
+
+
+
+// Reset password
+
+export const resetPassword = async (password) => {
+   try {
+      return await axios.post(`${curr_url}/forget/resetPassword`, password);
+   }
+   catch (err) {
+      console.log(err);
+   }
+}
+
+
+
+// Resend the verification link
+export const resendVerifyLink = async (email) => {
+   try {
+      return await axios.post(`${curr_url}/verify/resend`, email);
+   }
+   catch (err) {
+      console.log(err);
+   }
+}
+
+// Check the verification 
+
+export const checkVerification = async (token) => {
+   try {
+      return await axios.post(`${curr_url}/verify/mail`, token);
+   }
+   catch (err) {
+      console.log(err);
+   }
+}
+
+
+
 
 
 

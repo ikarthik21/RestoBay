@@ -42,6 +42,7 @@ const AllTableOrders = () => {
 
                                 return <TableRow key={order.orderId}>
                                     <TableInnerRow>
+                                    <img src={"/images/tablelogo.png"} style={{ width: '150px' }} alt="" />
 
                                         <div className='applyFlex2 marginBottom'>
                                             <div className='flexSpacebtw marginBottom'>

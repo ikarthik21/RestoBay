@@ -13,9 +13,10 @@ import TableBooking from './Components/Table/TableBooking';
 import { getAllOrders } from './Service/Api';
 import AllTableOrders from './Components/Table/AllTableOrders';
 import AdminTables from './Components/Admin/AdminTables';
-import Admin from './Components/Admin/Admin';
 import AdminUsers from './Components/Admin/AdminUsers';
-
+import Profile from './Components/Login/Profile';
+import ResetPassword from './Components/Login/ResetPassword';
+import Verify from './Components/Login/Verify';
 function App() {
   const [userRole, setUserRole] = useState('');
   const [isAuth, setIsAuth] = useState(false);
@@ -66,13 +67,16 @@ function App() {
               <Route path="/admin/orders" element={<AdminOrders />} />
               <Route path="/admin/tables" element={<AdminTables />} />
               <Route path="/admin/users" element={<AdminUsers />} />
-              <Route path="/admin" element={<Admin />} />
-
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/resetPassword/:token" element={<ResetPassword />} />
+              <Route path="/verify/email/:token" element={<Verify />} />
             </>
           ) : (
             <>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/verify/email/:token" element={<Verify />} />
+              <Route path="/resetPassword/:token" element={<ResetPassword />} />
 
             </>
           )}
