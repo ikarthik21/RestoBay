@@ -36,6 +36,27 @@ router.post('/getcart', CartController().getCart);
 // Route to update the cart of a user
 router.post('/updatecart', CartController().update);
 
+// Route to  get profile of a user
+router.get('/getprofile', UserController().getProfile);
+
+
+
+// Route to  edit profile of a user
+router.post('/editprofile', UserController().editProfile);
+
+// Route for forget password 
+router.post('/forget/password', UserController().forgetPassword);
+
+// Route for reset password 
+router.post('/forget/resetPassword', UserController().passwordReset);
+
+// Route for verify email
+
+router.post('/verify/mail', UserController().verifyMail);
+
+// Route for resend verfication email
+
+router.post('/verify/resend', UserController().resendMail);
 
 
 //  Get all table bookings of a particular user

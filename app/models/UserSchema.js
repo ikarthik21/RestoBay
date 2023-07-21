@@ -45,8 +45,15 @@ const UserSchema = new mongoose.Schema({
     cart: {
         type: Object,
         default: {}
-    }
-
+    },
+    resetToken: {
+        type: String,
+        default: null,
+    },
+    resetTokenExpiration: {
+        type: Date,
+        default: null,
+    },
 }, { timestamps: true });
 
 
