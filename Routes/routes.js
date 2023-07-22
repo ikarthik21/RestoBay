@@ -3,6 +3,7 @@ import UserController from '../app/controllers/UserController.js';
 import CartController from '../app/controllers/CartController.js';
 import OrderController from '../app/controllers/OrderController.js';
 import Auth from '../app/middlewares/Auth.js';
+import Admin from '../app/middlewares/Admin.js';
 import TableController from '../app/controllers/TableController.js';
 import AdminController from '../app/controllers/Admin/AdminController.js'
 const router = express.Router();
@@ -11,9 +12,6 @@ const router = express.Router();
 router.get('/', (req, res) => {
      res.send("<h1>Welcome to the Backend Server</h1>");
 })
-
-
-
 
 // User Routes
 
@@ -24,31 +22,31 @@ router.post('/register', UserController().register);
 router.post('/login', UserController().login);
 
 // Route to get the restaurant menu 
-router.get('/getmenu', CartController().getMenu);
+router.get('/getmenu', Auth, CartController().getMenu);
 
 // get all tables of the restaurant
-router.get('/gettables', TableController().getTables);
+router.get('/gettables', Auth, TableController().getTables);
 
 
 // Get Cart of a user
-router.post('/getcart', CartController().getCart);
+router.post('/getcart', Auth, CartController().getCart);
 
 // Route to update the cart of a user
-router.post('/updatecart', CartController().update);
+router.post('/updatecart', Auth, CartController().update);
 
 // Route to  get profile of a user
-router.get('/getprofile', UserController().getProfile);
+router.get('/getprofile', Auth, UserController().getProfile);
 
 
 
 // Route to  edit profile of a user
-router.post('/editprofile', UserController().editProfile);
+router.post('/editprofile', Auth, UserController().editProfile);
 
 // Route for forget password 
 router.post('/forget/password', UserController().forgetPassword);
 
 // Route for reset password 
-router.post('/forget/resetPassword', UserController().passwordReset);
+router.post('/forget/resetPassword', Auth, UserController().passwordReset);
 
 // Route for verify email
 
@@ -60,25 +58,25 @@ router.post('/verify/resend', UserController().resendMail);
 
 
 //  Get all table bookings of a particular user
-router.get('/getalltablebooks', TableController().getallTableOrder);
+router.get('/getalltablebooks', Auth, TableController().getallTableOrder);
 
 //get all food orders of a particular user
-router.get('/getallorders', OrderController().getAllOrders);
+router.get('/getallorders', Auth, OrderController().getAllOrders);
 
 
 // Payment Routes
 
 // Route to intialze a table booking
-router.post('/booktable', TableController().bookTable);
+router.post('/booktable', Auth, TableController().bookTable);
 
 // route to intialize a food order
-router.post('/payment/orders', OrderController().createOrder);
+router.post('/payment/orders', Auth, OrderController().createOrder);
 
 // User payment  verification for food orders 
-router.post('/payment/success', OrderController().verifyPayment);
+router.post('/payment/success', Auth, OrderController().verifyPayment);
 
 // User payment  verification for table payments
-router.post('/payment/table/success', TableController().verifybookTable);
+router.post('/payment/table/success', Auth, TableController().verifybookTable);
 
 
 
@@ -86,13 +84,13 @@ router.post('/payment/table/success', TableController().verifybookTable);
 // admin routes
 
 // route to get the all table orders for admin
-router.get('/tableorders', AdminController().tablebooks);
+router.get('/tableorders', Admin, AdminController().tablebooks);
 
 // route to get all the food orders  for admin
-router.get('/foodorders', AdminController().foodorders);
+router.get('/foodorders', Admin, AdminController().foodorders);
 
 // route to get all the users
-router.get('/allusers', AdminController().allUsers);
+router.get('/allusers', Admin, AdminController().allUsers);
 
 
 

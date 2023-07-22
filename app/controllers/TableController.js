@@ -36,10 +36,15 @@ const TableController = () => {
 
             try {
                 const existingorder = await TableOrder.findOne({ userId: username, tableno: tableno, endtime: endtime, starttime: starttime, date: date });
-                return res.status(200).json({
-                    orderId: existingorder.orderId,
-                    amount: existingorder.totalPrice,
-                });
+
+
+                if (existingorder) {
+                    return res.status(200).json({
+                        orderId: existingorder.orderId,
+                        amount: existingorder.totalPrice,
+                    });
+                }
+
             }
             catch (error) {
                 console.log(error)
