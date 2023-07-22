@@ -6,9 +6,12 @@ import Cookies from 'js-cookie';
 const token = Cookies.get('token');
 
 // Set the default Authorization header for all requests
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+if (token) {
+   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}
 
 const curr_url = process.env.REACT_APP_BACKEND_URL;
+console.log(curr_url);
 
 export const adduser = async (user) => {
    try {
