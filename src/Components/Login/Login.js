@@ -1,69 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormItem, AllSecWrap } from '../Styles/HomeStyles';
 import '../../App.css'
-import { Notyf } from 'notyf';
-import 'notyf/notyf.min.css';
 import { useNavigate } from 'react-router-dom';
-import { loginUser, adduser, forgetPassword, resendVerifyLink } from '../../Service/Api';
+import { loginUser, forgetPassword, resendVerifyLink } from '../../Service/Api';
 import { Imagebox, LogBox, SignBox } from '../Styles/Sign'
 import Cookies from "js-cookie";
 import { Container } from '../Styles/Menu';
+import { notyf } from '../Styles/Navstyles';
+import Register from './Register';
 
-
-const notyf = new Notyf({
-    duration: 3000,
-    position: {
-        x: 'right',
-        y: 'top',
-    },
-    types: [
-        {
-            type: 'error',
-            background: '#ef5644',
-            duration: 5000,
-            dismissible: true
-        },
-        {
-            type: 'info',
-            background: '#00adf1',
-            duration: 5000,
-            dismissible: true
-        }
-
-    ]
-});
-
-const loginuserDetails = {
-    lemail: "",
-    lpassword: "",
-}
 
 const Login = () => {
 
-    // Basic User Structure
 
-    const userDetails = {
-        name: "",
-        email: "",
-        phone: "",
-        password: "",
-        cpassword: ""
+    const loginuserDetails = {
+        lemail: "",
+        lpassword: "",
+    };
 
-    }
+
 
     const navigate = useNavigate();
     const [Loginpg, setLoginpg] = useState(true); // toggle login and signup 
     const [loginDetails, setloginDetails] = useState(loginuserDetails); // set user details for login
-    const [details, setDetails] = useState(userDetails); // set user details for registration
+
     const [showfEmail, setShowfEmail] = useState(false);
     const [showVemail, setshowVemail] = useState(false);
     const [femail, setFemail] = useState({ femail: "" });
     const [vemail, setVemail] = useState({ vemail: "" });
 
-    // input reading for  user registration
-    const readInput = (e) => {
-        setDetails({ ...details, [e.target.name]: e.target.value });
-    }
 
     // input reading for  user login
     const readLoginInput = (e) => {
@@ -82,15 +47,21 @@ const Login = () => {
 
     // toggle login and signup forms
     const toggleLogin = () => {
-        setShowfEmail(!showfEmail)
-        setLoginpg(!Loginpg)
-
+        setShowfEmail(!showfEmail);
+        setLoginpg(!Loginpg);
     }
+
+
+    useEffect(() => {
+        console.log(loginDetails)
+
+    }, [loginDetails])
+
 
     // user login function
     const validateLogin = async () => {
 
-        if (loginDetails.email && loginDetails.password) {
+        if (loginDetails.lemail && loginDetails.lpassword) {
             try {
                 const response = await loginUser(loginDetails);
                 const token = response.data.token;
@@ -122,35 +93,6 @@ const Login = () => {
         }
     }
 
-
-    // user registration function 
-    const addNewUser = async () => {
-        if (details.email && details.cpassword && details.phone && details.password && details.name) {
-            if (details.password === details.cpassword) {
-                try {
-                    const data = await adduser(details);
-
-
-                    notyf.open({
-                        type: 'info',
-                        message: data.data.message
-                    });
-
-                    navigate("/login");
-                }
-                catch (error) {
-                    notyf.error("Error adding user", error);
-                }
-            }
-            else {
-                notyf.error('Both passwords must be same');
-            }
-        }
-        else {
-            notyf.error('Please fill all the fields');
-        }
-
-    }
 
 
     const sendMail = async (e) => {
@@ -284,44 +226,20 @@ const Login = () => {
                                 }
 
 
-                            </LogBox> : <LogBox>
-                                <h2 className='changeFontColor'>Create an account</h2>
-                                <div  >
-                                    <FormItem>
-                                        <input type="text" name="name" onChange={readInput} placeholder='Name' />
-                                    </FormItem>
-                                    <FormItem>
-                                        <input type="email" name="email" onChange={readInput} placeholder='Email' />
-                                    </FormItem>
-                                    <FormItem>
-                                        <input type="text" name="phone" onChange={readInput} placeholder='Phone Number' />
-                                    </FormItem>
-                                    <FormItem>
-                                        <input type="password" name="password" onChange={readInput} placeholder='Password' />
-                                    </FormItem>
-                                    <FormItem>
-                                        <input type="password" name="cpassword" onChange={readInput} placeholder='Confirm Password' />
-                                    </FormItem>
-                                    <div className='applyFlexCol' style={{ textAlign: 'center' }}>
+                            </LogBox> :
 
-                                        <FormItem>
-                                            <button className='mainBtStyle' onClick={addNewUser} >
-                                                Create
-                                            </button>
-                                        </FormItem>
+                                <div className='applyFlexCol'>
+
+                                    <Register />
+
+                                    <div className='applyFlexCol' style={{ textAlign: 'center' }}>
+                                        <button onClick={toggleLogin} className='sp-bt'>
+                                            Already a Member? Login
+                                        </button>
 
                                     </div>
                                 </div>
-
-                                <div className='applyFlexCol' style={{ textAlign: 'center' }}>
-                                    <button onClick={toggleLogin} className='sp-bt'>
-                                        Already a Member? Login
-                                    </button>
-
-                                </div>
-
-
-                            </LogBox>}
+                        }
                         <Imagebox>
                             <img src="/images/chef.png" alt="" />
                         </Imagebox>
