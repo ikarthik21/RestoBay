@@ -52,7 +52,7 @@ const UserController = () => {
 
                     const registeredUser = await newUser.save();
 
-                    const token = jwt.sign({ registeredUser: user._id }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+                    const token = jwt.sign({ registeredUser: registeredUser._id }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
 
 
                     const mailOptions = {
@@ -63,7 +63,7 @@ const UserController = () => {
                         <p>Hi ${registeredUser.name}</p>
                         <p>Welcome to Restobay 😊 </p>
                         <p>Click the following link to verify your email: 
-                            <a href="${process.env.FRONTEND_URL}/verify/${token}">verify email</a></p>`,
+                            <a href="${process.env.FRONTEND_URL}/verify/email/${token}">verify email</a></p>`,
                     };
 
 
@@ -87,8 +87,8 @@ const UserController = () => {
         },
 
         async login(req, res) {
-            const { email, password } = req.body;
-            const user = await UserRegister.findOne({ email: email });
+            const { lemail, lpassword } = req.body;
+            const user = await UserRegister.findOne({ email: lemail });
 
             if (user) {
                 if (user.verified !== true) {
@@ -100,7 +100,7 @@ const UserController = () => {
                 const userid = user._id.toHexString();
 
                 try {
-                    const rslt = await bcrypt.compare(password, user.password);
+                    const rslt = await bcrypt.compare(lpassword, user.password);
 
                     if (rslt) {
                         const token = jwt.sign(
