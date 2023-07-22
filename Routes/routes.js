@@ -46,7 +46,7 @@ router.post('/editprofile', Auth, UserController().editProfile);
 router.post('/forget/password', UserController().forgetPassword);
 
 // Route for reset password 
-router.post('/forget/resetPassword', Auth, UserController().passwordReset);
+router.post('/forget/resetPassword', UserController().passwordReset);
 
 // Route for verify email
 

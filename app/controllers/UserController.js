@@ -223,6 +223,7 @@ const UserController = () => {
 
 
             const { password, token } = req.body;
+         
 
             try {
                 const user = await UserRegister.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } });
@@ -235,9 +236,7 @@ const UserController = () => {
                 user.password = hashedPassword;
                 user.resetToken = null;
                 user.resetTokenExpiration = null;
-
                 await user.save();
-
                 res.status(200).json({ message: 'Password reset successful.' });
             } catch (error) {
                 console.error(error);
@@ -291,7 +290,7 @@ const UserController = () => {
 
             try {
                 const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
- 
+
                 const { userId } = decodedToken;
                 const user = await UserRegister.findOne({ _id: userId });
 
