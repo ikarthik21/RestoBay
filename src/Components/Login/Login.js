@@ -34,8 +34,8 @@ const notyf = new Notyf({
 });
 
 const loginuserDetails = {
-    email: "",
-    password: "",
+    lemail: "",
+    lpassword: "",
 }
 
 const Login = () => {
@@ -237,11 +237,11 @@ const Login = () => {
 
                                             <>
                                                 <FormItem>
-                                                    <input type="email" onChange={readLoginInput} name="email" placeholder='Email' />
+                                                    <input type="email" onChange={readLoginInput} name="lemail" placeholder='Email' />
                                                 </FormItem>
 
                                                 <FormItem>
-                                                    <input type="password" onChange={readLoginInput} name="password" placeholder='Password' />
+                                                    <input type="password" onChange={readLoginInput} name="lpassword" placeholder='Password' />
                                                 </FormItem>
                                                 <br />
                                                 <FormItem>
