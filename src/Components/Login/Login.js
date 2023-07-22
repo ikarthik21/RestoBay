@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FormItem, AllSecWrap } from '../Styles/HomeStyles';
 import '../../App.css'
 import { useNavigate } from 'react-router-dom';
@@ -12,13 +12,10 @@ import Register from './Register';
 
 const Login = () => {
 
-
     const loginuserDetails = {
         lemail: "",
         lpassword: "",
     };
-
-
 
     const navigate = useNavigate();
     const [Loginpg, setLoginpg] = useState(true); // toggle login and signup 
@@ -50,13 +47,6 @@ const Login = () => {
         setShowfEmail(!showfEmail);
         setLoginpg(!Loginpg);
     }
-
-
-    useEffect(() => {
-        console.log(loginDetails)
-
-    }, [loginDetails])
-
 
     // user login function
     const validateLogin = async () => {
@@ -116,7 +106,7 @@ const Login = () => {
     const resendMail = async () => {
         try {
             const resp = await resendVerifyLink(vemail);
-            console.log(resp);
+           
             if (resp.data.message) {
                 notyf.open({
                     type: 'info',

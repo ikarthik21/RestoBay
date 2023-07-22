@@ -72,7 +72,7 @@ const Payment = (props) => {
 
                 try {
                     const response = await bookTable(props?.booking);
-                    console.log(response)
+                    
                     if (response.data.message) {
                         notyf.open({
                             type: 'info',
@@ -102,7 +102,7 @@ const Payment = (props) => {
 
                             try {
                                 const result = await verifyTablePayment(data);
-                                console.log(result);
+                             
                                 if (result.data.message) {
                                     notyf.open({
                                         type: 'info',

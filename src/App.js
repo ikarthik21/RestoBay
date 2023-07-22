@@ -70,6 +70,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/resetPassword/:token" element={<ResetPassword />} />
               <Route path="/verify/email/:token" element={<Verify />} />
+           
             </>
           ) : (
             <>
@@ -77,6 +78,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/verify/email/:token" element={<Verify />} />
               <Route path="/resetPassword/:token" element={<ResetPassword />} />
+               <Route path="*" element={<Login />} />
 
             </>
           )}
