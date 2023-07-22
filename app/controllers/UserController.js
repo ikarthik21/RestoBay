@@ -52,7 +52,7 @@ const UserController = () => {
 
                     const registeredUser = await newUser.save();
 
-                    const token = jwt.sign({ registeredUser: registeredUser._id }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+                    const token = jwt.sign({ userId: registeredUser._id }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
 
 
                     const mailOptions = {
@@ -291,7 +291,7 @@ const UserController = () => {
 
             try {
                 const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
-
+ 
                 const { userId } = decodedToken;
                 const user = await UserRegister.findOne({ _id: userId });
 
