@@ -36,7 +36,7 @@ const PaymentButton = (props) => {
             const { amount, orderId } = response.data;
 
             const options = {
-                key: process.env.RAZORPAY_KEY_ID,
+                key: process.env.REACT_APP_RAZORPAY_KEY_ID,
                 amount: amount.toString(),
                 currency: "INR",
                 name: 'Restobay Foods',

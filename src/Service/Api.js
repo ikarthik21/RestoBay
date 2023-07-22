@@ -11,8 +11,7 @@ if (token) {
 }
 
 const curr_url = process.env.REACT_APP_BACKEND_URL;
-console.log(curr_url);
-console.log(process.env.RAZORPAY_KEY_ID);
+ 
 
 export const adduser = async (user) => {
    try {
