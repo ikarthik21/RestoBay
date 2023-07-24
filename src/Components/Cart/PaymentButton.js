@@ -32,6 +32,7 @@ const PaymentButton = (props) => {
         try {
 
             const response = await makeOrder(props.cart);
+           
 
             const { amount, orderId } = response.data;
 
