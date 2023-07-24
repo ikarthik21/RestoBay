@@ -82,6 +82,7 @@ const OrderController = () => {
         async verifyPayment(req, res) {
 
             const { orderCreationId, razorpayPaymentId, razorpayOrderId, razorpaySignature, cartId } = req.body;
+         
             const text = orderCreationId + '|' + razorpayPaymentId;
             const generatedSignature = crypto
                 .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
