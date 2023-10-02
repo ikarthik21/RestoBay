@@ -53,7 +53,7 @@ export const getCart = async (cartidObj) => {
 export const getMenu = async () => {
 
    try {
-      return await axios.get(`${curr_url}/getmenu`);
+      return await axios.get(`${curr_url}/menu`);
    } catch (err) {
       console.log(err);
    }

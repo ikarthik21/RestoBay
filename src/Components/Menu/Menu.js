@@ -8,13 +8,23 @@ import CartComp from '../Cart/Cartcomp';
 import Modal from '../Cart/Modal';
 import { AllSecWrap } from '../Styles/HomeStyles';
 
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getMenuF } from '../../store/menuSlice';
 
 const Menu = (props) => {
+
     const [itemDisplay, setitemDisplay] = useState("");
     const [itemCat, setitemCat] = useState("");
     const [cart, setCart] = useState();
-    const [menu, setMenu] = useState();
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getMenuF());
+    }, [dispatch])
+
+    const { data: menu } = useSelector(state => state.menu)
+
 
     // Toggle between the food categories
     useEffect(() => {
@@ -26,21 +36,15 @@ const Menu = (props) => {
         }
     }, [itemCat])
 
-    // get Menu
-    useEffect(() => {
-        const getMenulis = async () => {
-            const resp = await getMenu();
-            setMenu(resp.data);
-        }
-        getMenulis();
-    }, [])
+
+
 
 
     // Get Existing Cart from Db
     useEffect(() => {
         const getcart = async (cartobj) => {
             const resp = await getCart(cartobj);
-   
+
             setCart(resp.data.cart);
         }
         getcart({ cartid: props.userId });
