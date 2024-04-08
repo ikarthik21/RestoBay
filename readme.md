@@ -21,9 +21,6 @@ https://restobayfoods.onrender.com/
 
 https://youtu.be/gQN8AUGeppE
 
-## Authors
-
-- [@ikarthik21](https://github.com/ikarthik21)
 
  
 
