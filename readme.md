@@ -15,7 +15,7 @@ day. This brings all necessities in one place that benefits both user and the ow
 
 ### Live On
 
-https://restobayfoods.onrender.com/
+ https://restobay.vercel.app/
 
 #### Demo Video
 
